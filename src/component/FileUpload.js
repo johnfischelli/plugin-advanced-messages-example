@@ -18,14 +18,16 @@ class FileUpload extends React.Component {
     this.setState({
       selectedImage: file[0]
     })
-    console.log(file[0]);
   }
 
   onSubmit(e) {
     e.preventDefault();
+
+    // see: https://www.twilio.com/docs/chat/media-support?code-sample=code-creating-a-media-message-2&code-language=JavaScript&code-sdk-version=default
     let data = new FormData();
     data.append('file', this.state.selectedImage)
 
+    // after formulating the media message - send it into the channel
     this.props.chatChannel.sendMessage(data);
   }
 

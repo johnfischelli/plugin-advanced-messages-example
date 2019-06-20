@@ -14,8 +14,7 @@ class MessageListItem extends React.Component {
 
     const { message } = this.props;
 
-    console.log(message);
-
+    // check if the message is not a media message
     if (null === message.source.media) {
       this.setState({
         render: (<div dangerouslySetInnerHTML={{ __html: message.source.body }} />)
@@ -23,6 +22,7 @@ class MessageListItem extends React.Component {
       return;
     }
 
+    // if the message is a media message - retrieve its url and render it inside an image
     message.source.media.getContentUrl().then((url) => {
       this.setState({
         render: (<img width="200" src={url} alt="alt" />)

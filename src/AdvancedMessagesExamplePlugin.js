@@ -19,9 +19,21 @@ export default class AdvancedMessagesExample extends FlexPlugin {
    * @param manager { import('@twilio/flex-ui').Manager }
    */
   init(flex, manager) {
+    /**
+      Append a small File Upload Component to the Messaging Canvas
+    **/
     flex.MessagingCanvas.Content.add(<FileUpload key="file-upload" />);
+
+    /**
+      Replace MessageListItems with a custom implementation
+      @TODO: Twilio team to restore default styling
+    **/
     flex.MessageListItem.Content.replace(<MessageListItem key="new-message-bubble" />);
 
+    /**
+      Example of how to pre-process the message body before sending the message into the chat channel
+      This utilizes the Marked library -- https://marked.js.org which supports CommonMark 0.29
+    **/
     flex.Actions.addListener('beforeSendMessage', (payload) => {
       payload.body = marked(payload.body);
     })
