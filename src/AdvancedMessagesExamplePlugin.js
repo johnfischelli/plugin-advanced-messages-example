@@ -37,5 +37,47 @@ export default class AdvancedMessagesExample extends FlexPlugin {
     flex.Actions.addListener('beforeSendMessage', (payload) => {
       payload.body = marked(payload.body);
     })
+
+    /**
+      Example of Agent auto-response
+    **/
+    flex.Actions.addListener("afterAcceptTask", (payload) => {
+
+      // store the channel we're seeking to work with
+      let channelSid = payload.task.attributes.channelSid;
+
+      // if the task is not a web chat - end
+      if (payload.task.channelType !== "web") {
+        return;
+      }
+
+      // what we're doing here is waiting until the chat SDK has fully booted up
+      // unfortunately, the after accept task event, the chat SDK may still be booting up
+      // these events are not tied together in Flex
+      let channelPromise = new Promise((resolve, reject) => {
+        let interval = setInterval(() => {
+          let channel = manager.store.getState().flex.chat.channels[channelSid];
+          if (undefined !== channel) {
+            clearInterval(interval);
+            resolve(channel.source);
+          }
+        }, 250)
+      });
+
+      // we now have access to the task attributes through payload.task.attributes
+      // we have worker details through manager.workerClient.attributes
+      // using these pieces of information you could call-out to a Shopify service
+      // to determine what the welcome message should be
+
+      // when the channel is finally ready
+      channelPromise.then((channel) => {
+        // set the body and send a message in the channel
+        let body = `Hi! I'm ${manager.workerClient.attributes.full_name} and this is our predefined message.`;
+        flex.Actions.invokeAction('SendMessage', {
+          channelSid: channel.sid,
+          body: body
+        });
+      })
+    })
   }
 }
