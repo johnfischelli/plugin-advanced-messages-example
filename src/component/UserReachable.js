@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withTheme } from '@twilio/flex-ui';
 
-class FileUpload extends React.Component {
+class UserReachable extends React.Component {
   constructor(props) {
     super(props)
     this.props = props;
@@ -54,5 +54,5 @@ const mapStateToProps = (state, ownProps) => {
   };
 }
 
-export default connect(mapStateToProps)(withTheme(FileUpload));
+export default connect(mapStateToProps)(withTheme(UserReachable));
 
