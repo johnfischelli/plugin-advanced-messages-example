@@ -2,6 +2,7 @@ import { FlexPlugin } from 'flex-plugin';
 import React from 'react';
 import FileUpload from './component/FileUpload';
 import MessageListItem from './component/MessageListItem';
+// import UserReachable from './component/UserReachable';
 import marked from 'marked';
 
 const PLUGIN_NAME = 'AdvancedMessagesExample';
@@ -23,6 +24,9 @@ export default class AdvancedMessagesExample extends FlexPlugin {
       Append a small File Upload Component to the Messaging Canvas
     **/
     flex.MessagingCanvas.Content.add(<FileUpload key="file-upload" />);
+    // flex.MessagingCanvas.Content.add(<UserReachable key="user-reachable" />, {
+    //   sortOrder: -1
+    // });
 
     /**
       Replace MessageListItems with a custom implementation
