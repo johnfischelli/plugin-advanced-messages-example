@@ -1,7 +1,7 @@
 import React from 'react';
 import { withTheme } from '@twilio/flex-ui';
 
-class MessageListItem extends React.Component {
+class MessageBubble extends React.Component {
   constructor(props) {
     super(props)
     this.props = props;
@@ -17,10 +17,14 @@ class MessageListItem extends React.Component {
     // check if the message is not a media message
     if (null === message.source.media) {
       this.setState({
-        render: (<div dangerouslySetInnerHTML={{ __html: message.source.body }} />)
+        render: (<div dangerouslySetInnerHTML={{ __html: message.source.body }} />) // this allows markdown to work
       })
       return;
     }
+
+    // message.source.media.contentType will contain the messages content type
+    // by switching on this value you should be able to render the message however you want
+    // for example, PDFs
 
     // if the message is a media message - retrieve its url and render it inside an image
     message.source.media.getContentUrl().then((url) => {
@@ -35,5 +39,5 @@ class MessageListItem extends React.Component {
   }
 }
 
-export default withTheme(MessageListItem);
+export default withTheme(MessageBubble);
 
