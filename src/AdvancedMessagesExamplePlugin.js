@@ -51,17 +51,17 @@ export default class AdvancedMessagesExample extends FlexPlugin {
       let channelSid = payload.task.attributes.channelSid;
 
       // if the task is not a web chat - end
-      if (payload.task.channelType !== "web") {
+      if (!flex.TaskHelper.isChatBasedTask(payload.task)) {
         return;
       }
 
-      // what we're doing here is waiting until the chat SDK has fully booted up
-      // unfortunately, the after accept task event, the chat SDK may still be booting up
-      // these events are not tied together in Flex
+      // Once the task is accepted, it takes time to boot the Chat SDK
+      // Polling and checking for the channel is a way to ensure the
+      // the channel is ready to go before attempting to send in our first message
       let channelPromise = new Promise((resolve, reject) => {
         let interval = setInterval(() => {
           let channel = manager.store.getState().flex.chat.channels[channelSid];
-          if (undefined !== channel) {
+          if (undefined !== channel && undefined !== channel.source) {
             clearInterval(interval);
             resolve(channel.source);
           }
