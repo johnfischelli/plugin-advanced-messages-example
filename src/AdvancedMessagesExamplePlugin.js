@@ -32,7 +32,7 @@ export default class AdvancedMessagesExample extends FlexPlugin {
       Replace MessageListItems with a custom implementation
       @TODO: Twilio team to restore default styling
     **/
-    flex.MessageListItem.Content.replace(<MessageListItem key="new-message-bubble" />);
+    flex.MessageBubble.Content.replace(<MessageListItem key="new-message-bubble" />);
 
     /**
       Example of how to pre-process the message body before sending the message into the chat channel
