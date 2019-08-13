@@ -1,6 +1,18 @@
-# Your custom Twilio Flex Plugin
+# Advanced Messages Example
 
-Twilio Flex Plugins allow you to customize the apperance and behavior of [Twilio Flex](https://www.twilio.com/flex). If you want to learn more about the capabilities and how to use the API, check out our [Flex documentation](https://www.twilio.com/docs/flex).
+This plugin provides a starting point to illustrate how to add Markdown support to Twilio chat messages.
+
+Additionally, it adds an input field near the Chat Input field to illustrate how the agent could send an Image (or other file) through the chat channel.
+
+It also replaces the default Message Bubble implementation with a custom version that is able to render markdown or images, if necessary. If sending PDFs this custom message bubble will need to be extended to support rendering a PDF.
+
+Lastly, it contains an example of an first message auto-response when the agent accepts the incoming chat task.
+
+There are serveral comments throughout the code that explain what is happening.
+
+NOTE: styling of the Image input field is left off this example.
+
+![Example Image of Chat UI](https://indigo-bombay-5783.twil.io/assets/advanced-messages-example.png)
 
 ## Setup
 
