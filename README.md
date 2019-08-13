@@ -1,5 +1,8 @@
 # Advanced Messages Example
 
+---
+**This plugin requires at minimum, Flex 1.12**
+
 This plugin provides a starting point to illustrate how to add Markdown support to Twilio chat messages.
 
 Additionally, it adds an input field near the Chat Input field to illustrate how the agent could send an Image (or other file) through the chat channel.
