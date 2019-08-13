@@ -2,7 +2,6 @@ import { FlexPlugin } from 'flex-plugin';
 import React from 'react';
 import FileUpload from './component/FileUpload';
 import MessageBubble from './component/MessageBubble';
-// import UserReachable from './component/UserReachable';
 import marked from 'marked';
 
 const PLUGIN_NAME = 'AdvancedMessagesExample';
@@ -24,13 +23,9 @@ export default class AdvancedMessagesExample extends FlexPlugin {
       Append a small File Upload Component to the Messaging Canvas
     **/
     flex.MessagingCanvas.Content.add(<FileUpload key="file-upload" />);
-    // flex.MessagingCanvas.Content.add(<UserReachable key="user-reachable" />, {
-    //   sortOrder: -1
-    // });
 
     /**
-      Replace MessageListItems with a custom implementation
-      @TODO: Twilio team to restore default styling
+      Replace MessageBubble with a custom implementation
     **/
     flex.MessageBubble.Content.replace(<MessageBubble key="new-message-bubble" />);
 
@@ -70,7 +65,7 @@ export default class AdvancedMessagesExample extends FlexPlugin {
 
       // we now have access to the task attributes through payload.task.attributes
       // we have worker details through manager.workerClient.attributes
-      // using these pieces of information you could call-out to a Shopify service
+      // using these pieces of information you could call-out to a service
       // to determine what the welcome message should be
 
       // when the channel is finally ready
