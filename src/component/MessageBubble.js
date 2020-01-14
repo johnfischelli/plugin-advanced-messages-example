@@ -14,14 +14,6 @@ class MessageBubble extends React.Component {
 
     const { message } = this.props;
 
-    // check if the message is not a media message
-    if (null === message.source.media) {
-      this.setState({
-        render: (<div dangerouslySetInnerHTML={{ __html: message.source.body }} />) // this allows markdown to work
-      })
-      return;
-    }
-
     // message.source.media.contentType will contain the messages content type
     // by switching on this value you should be able to render the message however you want
     // for example, PDFs

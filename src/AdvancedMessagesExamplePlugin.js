@@ -2,7 +2,6 @@ import { FlexPlugin } from 'flex-plugin';
 import React from 'react';
 import FileUpload from './component/FileUpload';
 import MessageBubble from './component/MessageBubble';
-import marked from 'marked';
 
 const PLUGIN_NAME = 'AdvancedMessagesExample';
 
@@ -27,15 +26,9 @@ export default class AdvancedMessagesExample extends FlexPlugin {
     /**
       Replace MessageBubble with a custom implementation
     **/
-    flex.MessageBubble.Content.replace(<MessageBubble key="new-message-bubble" />);
-
-    /**
-      Example of how to pre-process the message body before sending the message into the chat channel
-      This utilizes the Marked library -- https://marked.js.org which supports CommonMark 0.29
-    **/
-    flex.Actions.addListener('beforeSendMessage', (payload) => {
-      payload.body = marked(payload.body);
-    })
+    flex.MessageBubble.Content.add(<MessageBubble key="new-message-bubble" />, {
+      if: (props) => props.message.source.media
+    });
 
     /**
       Example of Agent auto-response
