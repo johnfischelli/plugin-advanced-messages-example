@@ -3,11 +3,10 @@
 ---
 **This plugin requires at minimum, Flex 1.12**
 
-This plugin provides a starting point to illustrate how to add Markdown support to Twilio chat messages.
 
-Additionally, it adds an input field near the Chat Input field to illustrate how the agent could send an Image (or other file) through the chat channel.
+It adds an input field near the Chat Input field to illustrate how the agent could send an Image (or other file) through the chat channel.
 
-It also replaces the default Message Bubble implementation with a custom version that is able to render markdown or images, if necessary. If sending PDFs this custom message bubble will need to be extended to support rendering a PDF.
+It also replaces the default Message Bubble implementation with a custom version that is able to render images. If sending PDFs this custom message bubble will need to be extended to support rendering a PDF.
 
 Lastly, it contains an example of an first message auto-response when the agent accepts the incoming chat task.
 
@@ -24,7 +23,7 @@ Make sure you have [Node.js](https://nodejs.org) as well as [`npm`](https://npmj
 Afterwards install the dependencies by running `npm install`:
 
 ```bash
-cd plugin-mms-messages
+cd plugin-advanced-messages-example
 
 # If you use npm
 npm install
