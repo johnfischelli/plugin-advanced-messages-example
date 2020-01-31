@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withTheme } from '@twilio/flex-ui';
+import { withTheme, Actions } from '@twilio/flex-ui';
 
 class FileUpload extends React.Component {
   constructor(props) {
@@ -23,12 +23,17 @@ class FileUpload extends React.Component {
   onSubmit(e) {
     e.preventDefault();
 
-    // see: https://www.twilio.com/docs/chat/media-support?code-sample=code-creating-a-media-message-2&code-language=JavaScript&code-sdk-version=default
-    let data = new FormData();
-    data.append('file', this.state.selectedImage)
+    // upload code goes here, and should return the mimeType and mediaUrl
+    const mediaUrl, mimeType;
 
-    // after formulating the media message - send it into the channel
-    this.props.chatChannel.sendMessage(data);
+    Actions.invokeAction('SendMessage', {
+      channelSid: this.props.chatChannel.sid,
+      body: "",
+      messageAttributes: {
+        mimeType: mimeType,
+        mediaUrl: mediaUrl
+      }
+    });
   }
 
   render() {
