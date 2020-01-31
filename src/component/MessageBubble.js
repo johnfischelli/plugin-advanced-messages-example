@@ -14,16 +14,20 @@ class MessageBubble extends React.Component {
 
     const { message } = this.props;
 
-    // message.source.media.contentType will contain the messages content type
-    // by switching on this value you should be able to render the message however you want
-    // for example, PDFs
+    console.log(message);
+    const {mimeType, medialurl } = message.attributes;
 
-    // if the message is a media message - retrieve its url and render it inside an image
-    message.source.media.getContentUrl().then((url) => {
-      this.setState({
-        render: (<img width="200" src={url} alt="alt" />)
-      })
-    })
+    switch(mimeType) {
+      case 'application/PDF':
+        this.setState({
+          render: (<a href={mediaUrl}><img width="200" src="SOME PDF ICON" alt="alt" /></a>)
+        })  
+      break;
+      default:
+        this.setState({
+          render: (<img width="200" src={medialUrl} alt="alt" />)
+        })  
+    }
   }
 
   render() {
